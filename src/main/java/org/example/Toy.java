@@ -1,22 +1,23 @@
 package org.example;
 
-import java.util.Scanner;
-
 public class Toy {
 
-    private static int count = 0;
+    private static int id = 0;
 
     public String model;
+
+    public int count;
     public int weight;
 
-    Scanner scanner = new Scanner(System.in);
 
-    public Toy(String name, int weight) {
+    public Toy(String name, int count, int weight) {
         this.model = name;
+        this.count = count;
         this.weight = weight;
     }
 
-    private final int id;
+    public Toy() {}
+
     public int getId() {
         return id;
     }
@@ -29,31 +30,30 @@ public class Toy {
         this.model = model;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public int getWeight() {
         return weight;
     }
 
     public void setWeight(int weight) {
-        this.weight = weight;
-
+        if (weight >= 0 && weight <= 100)
+            this.weight = weight;
+        else
+            System.out.println("Incorrect value! Return again.");
     }
 
     {
-        id = ++count;
+        id = ++id;
     }
     @Override
     public String toString() {
-        return String.format("Toy: (id: %d, model: %s, weight: %d)", id, model, weight);
+        return String.format("Toy: (id: %d, model: %s, count: %d, weight: %d)", id, model, count, weight);
     }
-
-    public void Put(Toy toy){
-        System.out.println("Input new model: ");
-        model = scanner.nextLine();
-        toy.setModel(model);
-        System.out.println("Input new weight: ");
-        weight = scanner.nextInt();
-        toy.setWeight(weight);
-        System.out.println(toy.toString());
-    }
-
 }
